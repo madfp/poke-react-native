@@ -1,7 +1,14 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { useInfividualPokemon } from "../../hooks/useIndividualPokemon";
 import { getColorByType } from "../../utils/getColorByType";
 import { POKEMON_COLORS } from "../../types/pokemon.color.model";
+import { useNavigation } from "@react-navigation/native";
 
 type cardProps = {
   name: string;
@@ -9,8 +16,15 @@ type cardProps = {
 };
 
 export default function Card({ name, linkenable }: cardProps) {
+  const navigation = useNavigation();
   const pokemon = useInfividualPokemon(name);
-  const handlePress = () => {};
+
+  const handlePress = () => {
+    navigation.navigate("PokemonDetail", {
+      id: pokemon?.id,
+      name: pokemon?.name,
+    });
+  };
 
   const pokemonStyle = {
     ...styles.card,
@@ -20,7 +34,7 @@ export default function Card({ name, linkenable }: cardProps) {
   };
 
   return (
-    <>
+    <TouchableWithoutFeedback onPress={handlePress}>
       <View style={pokemonStyle}>
         {/* Image container */}
         <View style={styles.imageContainer}>
@@ -44,27 +58,24 @@ export default function Card({ name, linkenable }: cardProps) {
         </View>
 
         {/* Bottom stats & navigation */}
-        {linkenable && (
-          <View style={styles.bottomContainer}>
-            <View style={styles.container}>
-              <Image
-                style={{ width: 50, height: 50 }}
-                source={require("../../assets/poke-logo.webp")}
-              />
-              <Text style={styles.title}>{name.toUpperCase()}</Text>
-            </View>
-            <Text>Toggle</Text>
+        <View style={styles.bottomContainer}>
+          <View style={styles.container}>
+            <Image
+              style={{ width: 50, height: 50 }}
+              source={require("../../assets/poke-logo.webp")}
+            />
+            <Text style={styles.title}>{name.toUpperCase()}</Text>
           </View>
-        )}
+          <Text>Toggle</Text>
+        </View>
       </View>
-    </>
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
   imageContainer: {
     width: "100%",
-    height: 300,
     position: "relative",
     borderRadius: 10,
   },
@@ -73,7 +84,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: "white",
-    padding: 20,
+    padding: 10,
     margin: 10,
     borderRadius: 10,
     shadowColor: "black",
@@ -81,11 +92,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.26,
     shadowRadius: 8,
     elevation: 5,
-    minHeight: 400,
   },
   Image: {
     width: "100%",
     height: 300,
+    objectFit: "contain",
   },
   container: {
     justifyContent: "flex-start",

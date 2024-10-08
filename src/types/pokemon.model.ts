@@ -1,10 +1,12 @@
 export interface Pokemon {
+  id: number;
+  name: string;
   order: number;
   next: string | null;
   abilities: ability[];
   base_experience: number;
   forms: form[];
-  stats: stats[];
+  stats: pokemonStats[];
   types: type[];
   sprites: {
     back_default: string | null;
@@ -19,7 +21,7 @@ export interface Pokemon {
 }
 
 // STATS INTERFACE
-interface stats {
+export interface pokemonStats {
   base_stat: number;
   effort: number;
   stat: {

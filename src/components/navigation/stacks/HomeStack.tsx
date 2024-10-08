@@ -10,14 +10,14 @@ export default function HomeStack() {
         name="Start"
         component={Home}
         options={{
-          headerShown: false,
+          title: "Inicio",
         }}
       />
       <Stack.Screen
-        name="Individual"
+        name="PokemonDetail"
         component={IndividualScreen}
         options={{
-          headerShown: false,
+          title: "Detalles del pokemon",
         }}
       />
     </Stack.Navigator>

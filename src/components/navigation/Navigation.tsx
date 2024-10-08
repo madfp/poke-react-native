@@ -19,6 +19,7 @@ export default function Navigation() {
         options={{
           title: "Inicio",
           tabBarIcon: ({ size }) => <LogoIcon size={size} />,
+          headerShown: false,
         }}
       />
       <Tab.Screen
