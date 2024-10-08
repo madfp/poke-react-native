@@ -1,6 +1,6 @@
-export const getPokemons = async () => {
+export const getPokemons = async (next?: string | null) => {
   try {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon");
+    const response = await fetch(next || "https://pokeapi.co/api/v2/pokemon");
     const data = await response.json();
     return data;
   } catch (error) {
@@ -8,7 +8,7 @@ export const getPokemons = async () => {
   }
 };
 
-export const getPokemon = async (name: string) => {
+export const getIndividualPokemon = async (name: string) => {
   try {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
     const data = await response.json();

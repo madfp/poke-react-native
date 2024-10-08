@@ -1,5 +1,6 @@
 export interface Pokemon {
   order: number;
+  next: string | null;
   abilities: ability[];
   base_experience: number;
   forms: form[];

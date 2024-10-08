@@ -14,6 +14,14 @@ export default function Navigation() {
   return (
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen
+        name="Home"
+        component={HomeStack}
+        options={{
+          title: "Inicio",
+          tabBarIcon: ({ size }) => <LogoIcon size={size} />,
+        }}
+      />
+      <Tab.Screen
         name="Favorites"
         component={FavoriteStack}
         options={{
@@ -24,15 +32,6 @@ export default function Navigation() {
           ),
         }}
       />
-      <Tab.Screen
-        name="Home"
-        component={HomeStack}
-        options={{
-          title: "Inicio",
-          tabBarIcon: ({ size }) => <LogoIcon size={size} />,
-        }}
-      />
-
       <Tab.Screen
         name="Settings"
         component={AccountStack}
