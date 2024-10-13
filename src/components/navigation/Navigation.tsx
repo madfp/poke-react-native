@@ -3,10 +3,12 @@ import { Image } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 import AccountStack from "./stacks/AccountStack";
 import HomeStack from "./stacks/HomeStack";
 import FavoriteStack from "./stacks/FavoriteStack";
+import SearchStack from "./stacks/SearchStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,6 +21,17 @@ export default function Navigation() {
         options={{
           title: "Inicio",
           tabBarIcon: ({ size }) => <LogoIcon size={size} />,
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="Search"
+        component={SearchStack}
+        options={{
+          title: "Inicio",
+          tabBarIcon: ({ size, color }) => (
+            <AntDesign name="search1" size={24} color={color} />
+          ),
           headerShown: false,
         }}
       />

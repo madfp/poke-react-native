@@ -1,17 +1,17 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "../../screens/Home";
+import SearchScreen from "../../screens/Search";
 import IndividualScreen from "../../screens/Individual";
 import FavoriteButton from "../../ui/favorite";
 const Stack = createNativeStackNavigator();
 
-export default function HomeStack() {
+export default function SearchStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="Start"
-        component={Home}
+        component={SearchScreen}
         options={{
-          title: "Inicio",
+          title: "Buscar Pokemon",
           headerShown: false,
         }}
       />

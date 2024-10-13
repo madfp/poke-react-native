@@ -15,7 +15,7 @@ type cardProps = {
   linkenable?: boolean;
 };
 
-export default function Card({ name, linkenable }: cardProps) {
+export default function Card({ name }: cardProps) {
   const navigation = useNavigation();
   const pokemon = useInfividualPokemon(name);
 
@@ -26,27 +26,15 @@ export default function Card({ name, linkenable }: cardProps) {
     });
   };
 
-  const pokemonStyle = {
-    ...styles.card,
-    backgroundColor: getColorByType(
-      pokemon?.types[0].type.name as POKEMON_COLORS
-    ),
-  };
+  const backgroundColor = getColorByType(
+    pokemon?.types[0].type.name as POKEMON_COLORS
+  );
 
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
-      <View style={pokemonStyle}>
+      <View style={{ ...styles.card, backgroundColor: backgroundColor }}>
         {/* Image container */}
         <View style={styles.imageContainer}>
-          <Text
-            style={{
-              position: "absolute",
-              top: 10,
-              right: 10,
-            }}
-          >
-            #{pokemon?.order}
-          </Text>
           <Image
             style={styles.Image}
             source={
@@ -58,7 +46,11 @@ export default function Card({ name, linkenable }: cardProps) {
         </View>
 
         {/* Bottom stats & navigation */}
-        <View style={styles.bottomContainer}>
+        <View
+          style={{
+            ...styles.bottomContainer,
+          }}
+        >
           <View style={styles.container}>
             <Image
               style={{ width: 50, height: 50 }}
@@ -66,7 +58,9 @@ export default function Card({ name, linkenable }: cardProps) {
             />
             <Text style={styles.title}>{name.toUpperCase()}</Text>
           </View>
-          <Text>Toggle</Text>
+          <Text style={styles.order}>
+            #{pokemon?.order.toString().padStart(3, "0")}
+          </Text>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -74,29 +68,30 @@ export default function Card({ name, linkenable }: cardProps) {
 }
 
 const styles = StyleSheet.create({
+  order: {
+    fontWeight: "bold",
+    color: "white",
+    fontSize: 20,
+  },
   imageContainer: {
     width: "100%",
-    position: "relative",
-    borderRadius: 10,
+    height: 300,
   },
   card: {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "white",
-    padding: 10,
-    margin: 10,
+    padding: 20,
+    marginVertical: 10,
     borderRadius: 10,
     shadowColor: "black",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.26,
     shadowRadius: 8,
-    elevation: 5,
   },
   Image: {
     width: "100%",
-    height: 300,
-    objectFit: "contain",
+    height: "100%",
   },
   container: {
     justifyContent: "flex-start",

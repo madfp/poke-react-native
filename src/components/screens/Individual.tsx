@@ -1,17 +1,15 @@
-import { Image, StyleSheet, View } from "react-native";
+import { Image, ScrollView, StyleSheet, View } from "react-native";
 import Header from "../ui/individual-header";
 import PokemonStats from "../ui/pokemon-stats";
 import PokemonTypes from "../ui/pokemon-types";
 import { useInfividualPokemon } from "../../hooks/useIndividualPokemon";
-import { getColorByType } from "../../utils/getColorByType";
-import { POKEMON_COLORS } from "../../types/pokemon.color.model";
+import ActionsButtons from "../actions";
 
 export default function IndividualScreen({ route }: { route: any }) {
   const pokemon = useInfividualPokemon(route.params?.id);
-  //console.log(pokemon?.stats);
 
   return (
-    <View>
+    <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
       <Header name={pokemon?.name} order={pokemon?.order} />
       <Image
         style={styles.image}
@@ -21,9 +19,10 @@ export default function IndividualScreen({ route }: { route: any }) {
             : require("../../assets/poke-logo.webp")
         }
       />
-      <PokemonTypes />
-      <PokemonStats stats={pokemon?.stats || []} />
-    </View>
+      <PokemonTypes types={pokemon?.types} />
+      <PokemonStats stats={pokemon?.stats} />
+      <ActionsButtons />
+    </ScrollView>
   );
 }
 
