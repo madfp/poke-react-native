@@ -32,45 +32,47 @@ const Card = ({ name }: cardProps) => {
   );
 
   return (
-    <TouchableWithoutFeedback onPress={handlePress}>
-      <View
-        style={{
-          ...styles.card,
-          backgroundColor: "#EDEDED",
-        }}
-      >
-        {/* Image container */}
-        <View style={styles.imageContainer}>
-          <Image
-            style={styles.Image}
-            source={
-              pokemon?.sprites.front_default
-                ? { uri: pokemon?.sprites.front_default }
-                : require("../../assets/poke-logo.webp")
-            }
-          />
-        </View>
-
-        {/* Bottom stats & navigation */}
+    <>
+      <TouchableWithoutFeedback onPress={handlePress}>
         <View
           style={{
-            ...styles.bottomContainer,
-            backgroundColor: backgroundColor,
+            ...styles.card,
+            backgroundColor: "#EDEDED",
           }}
         >
-          <View style={styles.container}>
+          {/* Image container */}
+          <View style={styles.imageContainer}>
             <Image
-              style={{ width: 50, height: 50 }}
-              source={require("../../assets/poke-logo.webp")}
+              style={styles.Image}
+              source={
+                pokemon?.sprites.front_default
+                  ? { uri: pokemon?.sprites.front_default }
+                  : require("../../assets/poke-logo.webp")
+              }
             />
-            <Text style={styles.title}>{name.toUpperCase()}</Text>
           </View>
-          <Text style={styles.order}>
-            #{pokemon?.order.toString().padStart(3, "0")}
-          </Text>
+
+          {/* Bottom stats & navigation */}
+          <View
+            style={{
+              ...styles.bottomContainer,
+              backgroundColor: backgroundColor,
+            }}
+          >
+            <View style={styles.container}>
+              <Image
+                style={{ width: 50, height: 50 }}
+                source={require("../../assets/poke-logo.webp")}
+              />
+              <Text style={styles.title}>{name.toUpperCase()}</Text>
+            </View>
+            <Text style={styles.order}>
+              #{pokemon?.order.toString().padStart(3, "0")}
+            </Text>
+          </View>
         </View>
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
+    </>
   );
 };
 

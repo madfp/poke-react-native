@@ -8,23 +8,23 @@ import {
 import { useEffect, useState } from "react";
 
 export default function FavoriteButton({ id }: { id: string }) {
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState<boolean | undefined>(undefined);
 
   const addFav = async () => {
     await AddPokemonToFavorites(id);
+    setFavorite(true);
   };
 
   const deleteFav = async () => {
     await DeleteFavoritePokemon(id);
-  };
-
-  const checkFav = async () => {
-    const response = await CheckFavoritePokemon(id);
-    console.log(response);
+    setFavorite(false);
   };
 
   useEffect(() => {
-    checkFav();
+    (async () => {
+      const response = await CheckFavoritePokemon(id);
+      setFavorite(response);
+    })();
   }, [id]);
 
   return (

@@ -1,4 +1,4 @@
-import { Image, ScrollView, StyleSheet, View } from "react-native";
+import { Image, ScrollView, StyleSheet } from "react-native";
 import Header from "../ui/individual-header";
 import PokemonStats from "../ui/pokemon-stats";
 import PokemonTypes from "../ui/pokemon-types";
@@ -6,6 +6,7 @@ import { useInfividualPokemon } from "../../hooks/useIndividualPokemon";
 import ActionsButtons from "../actions";
 import { useEffect } from "react";
 import FavoriteButton from "../ui/favorite";
+
 import { ParamListBase, RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -24,12 +25,12 @@ export default function IndividualScreen({
   useEffect(() => {
     navigation.setOptions({
       title: pokemon?.name,
-      headerRight: () => <FavoriteButton id={route.params?.id} />,
+      headerRight: () => <FavoriteButton id={route.params?.id.toString()} />,
     });
   }, [pokemon]);
 
   return (
-    <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
+    <ScrollView>
       <Header name={pokemon?.name} order={pokemon?.order} />
       <Image
         style={styles.image}
