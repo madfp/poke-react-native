@@ -8,10 +8,8 @@ type props = {
 export default function Header({ name, order }: props) {
   return (
     <View style={styles.container}>
-      <Text style={styles.name}>
-        {name && name?.charAt(0).toUpperCase() + name?.slice(1)}
-      </Text>
-      <Text>#{order}</Text>
+      <Text style={styles.order}>#{order}</Text>
+      <Text style={styles.name}>lorem</Text>
     </View>
   );
 }
@@ -27,5 +25,11 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  order: {
+    padding: 10,
+    backgroundColor: "red",
+    fontSize: 20,
+    borderRadius: 10,
   },
 });

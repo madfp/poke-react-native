@@ -4,9 +4,29 @@ import PokemonStats from "../ui/pokemon-stats";
 import PokemonTypes from "../ui/pokemon-types";
 import { useInfividualPokemon } from "../../hooks/useIndividualPokemon";
 import ActionsButtons from "../actions";
+import { useEffect } from "react";
+import FavoriteButton from "../ui/favorite";
+import { ParamListBase, RouteProp } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-export default function IndividualScreen({ route }: { route: any }) {
-  const pokemon = useInfividualPokemon(route.params?.id);
+type IndividualScreenProps = {
+  route: RouteProp<{ params: { id: string } }, "params">;
+
+  navigation: NativeStackNavigationProp<ParamListBase>;
+};
+
+export default function IndividualScreen({
+  route,
+  navigation,
+}: IndividualScreenProps) {
+  const pokemon = useInfividualPokemon(route.params.id);
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: pokemon?.name,
+      headerRight: () => <FavoriteButton id={route.params?.id} />,
+    });
+  }, [pokemon]);
 
   return (
     <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
