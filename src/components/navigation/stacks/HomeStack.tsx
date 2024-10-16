@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../../screens/Home";
 import IndividualScreen from "../../screens/Individual";
-import FavoriteButton from "../../ui/favorite";
 const Stack = createNativeStackNavigator();
 
 export default function HomeStack() {
@@ -15,14 +14,7 @@ export default function HomeStack() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
-        name="PokemonDetail"
-        component={IndividualScreen}
-        options={{
-          title: "Detalles del pokemon",
-          headerRight: () => <FavoriteButton />,
-        }}
-      />
+      <Stack.Screen name="PokemonDetail" component={IndividualScreen} />
     </Stack.Navigator>
   );
 }

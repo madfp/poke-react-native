@@ -1,11 +1,8 @@
 import React from "react";
 import { Image } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import AntDesign from "@expo/vector-icons/AntDesign";
-
-import AccountStack from "./stacks/AccountStack";
 import HomeStack from "./stacks/HomeStack";
 import FavoriteStack from "./stacks/FavoriteStack";
 import SearchStack from "./stacks/SearchStack";
@@ -43,16 +40,6 @@ export default function Navigation() {
           tabBarLabel: "Favoritos",
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="favorite" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={AccountStack}
-        options={{
-          title: "Configuración",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" size={size} color={color} />
           ),
         }}
       />

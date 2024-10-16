@@ -9,13 +9,14 @@ import { useInfividualPokemon } from "../../hooks/useIndividualPokemon";
 import { getColorByType } from "../../utils/getColorByType";
 import { POKEMON_COLORS } from "../../types/pokemon.color.model";
 import { useNavigation } from "@react-navigation/native";
+import { memo } from "react";
 
 type cardProps = {
   name: string;
   linkenable?: boolean;
 };
 
-export default function Card({ name }: cardProps) {
+const Card = ({ name }: cardProps) => {
   const navigation = useNavigation();
   const pokemon = useInfividualPokemon(name);
 
@@ -32,7 +33,12 @@ export default function Card({ name }: cardProps) {
 
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
-      <View style={{ ...styles.card, backgroundColor: backgroundColor }}>
+      <View
+        style={{
+          ...styles.card,
+          backgroundColor: "#EDEDED",
+        }}
+      >
         {/* Image container */}
         <View style={styles.imageContainer}>
           <Image
@@ -49,6 +55,7 @@ export default function Card({ name }: cardProps) {
         <View
           style={{
             ...styles.bottomContainer,
+            backgroundColor: backgroundColor,
           }}
         >
           <View style={styles.container}>
@@ -65,7 +72,9 @@ export default function Card({ name }: cardProps) {
       </View>
     </TouchableWithoutFeedback>
   );
-}
+};
+
+export default memo(Card);
 
 const styles = StyleSheet.create({
   order: {
@@ -81,17 +90,19 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: 20,
     marginVertical: 10,
     borderRadius: 10,
     shadowColor: "black",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.26,
     shadowRadius: 8,
+    borderWidth: 1,
+    borderColor: "gray",
   },
   Image: {
     width: "100%",
     height: "100%",
+    objectFit: "contain",
   },
   container: {
     justifyContent: "flex-start",
@@ -106,8 +117,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     borderColor: "white",
-    borderWidth: 1,
-    borderRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
   },
   title: {
     fontSize: 18,

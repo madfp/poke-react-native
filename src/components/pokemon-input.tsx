@@ -1,25 +1,22 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import { useState } from "react";
+import { StyleSheet, TextInput, View } from "react-native";
+import { Dispatch, SetStateAction } from "react";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
-export default function PokemonInput() {
-  const [value, setValue] = useState("");
-
+export default function PokemonInput({
+  value,
+  setValue,
+}: {
+  value: string;
+  setValue: Dispatch<SetStateAction<string>>;
+}) {
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Search Pokemon"
+        placeholder="Busca un pokemon..."
         onChangeText={(newText) => setValue(newText)}
         value={value}
       />
-      <Pressable
-        style={styles.button}
-        onPress={() => {
-          console.log(value);
-        }}
-      >
-        <Text>See</Text>
-      </Pressable>
     </View>
   );
 }

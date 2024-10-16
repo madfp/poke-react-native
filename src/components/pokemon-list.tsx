@@ -24,40 +24,28 @@ export default function PokemonList({
   return (
     <>
       <FlatList
-        ListHeaderComponent={() => (
-          <View
-            style={{
-              padding: 10,
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text>Lorem</Text>
-            <Text>Lorem</Text>
-          </View>
-        )}
-        stickyHeaderHiddenOnScroll={false}
         contentContainerStyle={{
           padding: 10,
         }}
         data={pokemons}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item.name}
-        onEndReached={nextUrl ? loadMore : null} // This is the function that will be called when the end of the list is reached
-        onEndReachedThreshold={0.1} // This is the threshold to call the function
+        onEndReached={nextUrl ? loadMore : null}
+        onEndReachedThreshold={0.1}
         ListFooterComponent={
           nextUrl ? (
             <ActivityIndicator size={"large"} style={styles.spinner} />
           ) : null
         }
-        renderItem={({ item }) => (
-          <Card key={item.name} name={item.name} linkenable />
-        )}
+        renderItem={_renderItem}
       />
     </>
   );
 }
+
+const _renderItem = ({ item }: { item: ResponseModel }) => (
+  <Card key={item.name} name={item.name} linkenable />
+);
 
 const styles = StyleSheet.create({
   spinner: {
