@@ -9,15 +9,16 @@ import { useEffect, useState } from "react";
 
 export default function FavoriteButton({ id }: { id: string }) {
   const [favorite, setFavorite] = useState<boolean | undefined>(undefined);
+  const [reload, setReload] = useState(false);
 
   const addFav = async () => {
     await AddPokemonToFavorites(id);
-    setFavorite(true);
+    setReload((prev) => !prev);
   };
 
   const deleteFav = async () => {
     await DeleteFavoritePokemon(id);
-    setFavorite(false);
+    setReload((prev) => !prev);
   };
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function FavoriteButton({ id }: { id: string }) {
       const response = await CheckFavoritePokemon(id);
       setFavorite(response);
     })();
-  }, [id]);
+  }, [id, reload]);
 
   return (
     <>

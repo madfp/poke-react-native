@@ -46,9 +46,7 @@ export async function DeleteFavoritePokemon(id: string) {
     const data = await GetFavoritePokemons();
 
     // Create a new array without the id of the pokemon
-    const result = data.filter((value: string) => {
-      value != id;
-    });
+    const result = data.filter((value: string) => value !== id);
 
     // Set the new array on async storage
     await AsyncStorage.setItem(FAVORITE_STORAGE, JSON.stringify(result));

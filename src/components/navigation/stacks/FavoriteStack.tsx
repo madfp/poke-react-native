@@ -14,7 +14,7 @@ export default function FavoriteStack() {
         }}
       />
       <Stack.Screen
-        name="Individual"
+        name="PokemonDetail"
         component={IndividualScreen}
         options={{
           headerShown: false,

@@ -11,12 +11,7 @@ import { POKEMON_COLORS } from "../../types/pokemon.color.model";
 import { useNavigation } from "@react-navigation/native";
 import { memo } from "react";
 
-type cardProps = {
-  name: string;
-  linkenable?: boolean;
-};
-
-const Card = ({ name }: cardProps) => {
+const Card = ({ name }: { name: string }) => {
   const navigation = useNavigation();
   const pokemon = useInfividualPokemon(name);
 
@@ -64,7 +59,7 @@ const Card = ({ name }: cardProps) => {
                 style={{ width: 50, height: 50 }}
                 source={require("../../assets/poke-logo.webp")}
               />
-              <Text style={styles.title}>{name.toUpperCase()}</Text>
+              <Text style={styles.title}>{pokemon?.name.toUpperCase()}</Text>
             </View>
             <Text style={styles.order}>
               #{pokemon?.order.toString().padStart(3, "0")}

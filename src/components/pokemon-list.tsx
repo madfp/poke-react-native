@@ -1,11 +1,17 @@
-import { FlatList, ActivityIndicator, StyleSheet } from "react-native";
+import { FlatList, ActivityIndicator, StyleSheet, Text } from "react-native";
 import type { ResponseModel } from "../types/response.model";
 import Card from "./ui/card";
-import { usePokemons } from "../hooks/usePokemons";
+import NotFound from "./no-pokemons";
 
-export default function PokemonList() {
-  const { loadPokemons, pokemons, nextUrl } = usePokemons();
-
+export default function PokemonList({
+  loadPokemons,
+  pokemons,
+  nextUrl,
+}: {
+  loadPokemons: () => void;
+  pokemons: ResponseModel[];
+  nextUrl: string | null;
+}) {
   return (
     <>
       <FlatList
@@ -13,6 +19,7 @@ export default function PokemonList() {
           padding: 10,
         }}
         data={pokemons}
+        ListEmptyComponent={() => <NotFound />}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item.name}
         onEndReached={nextUrl ? loadPokemons : null}
@@ -29,7 +36,7 @@ export default function PokemonList() {
 }
 
 const _renderItem = ({ item }: { item: ResponseModel }) => (
-  <Card key={item.name} name={item.name} linkenable />
+  <Card key={item.name} name={item.name} />
 );
 
 const styles = StyleSheet.create({
